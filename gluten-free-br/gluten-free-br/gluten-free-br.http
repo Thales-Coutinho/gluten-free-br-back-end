@@ -1,0 +1,6 @@
+@gluten_free_br_HostAddress = http://localhost:5125
+
+GET {{gluten_free_br_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
