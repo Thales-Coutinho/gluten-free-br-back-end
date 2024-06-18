@@ -31,4 +31,25 @@ public class RecipeController : ControllerBase
         if(recipe == null) return NotFound();
         return Ok(recipe);
     }
+
+    [HttpPost]
+    public IActionResult Post([FromBody] Recipe recipe)
+        {
+            if (recipe == null) return BadRequest();
+            return Ok(_recipeService.Create(recipe));
+        }
+
+    [HttpPut]
+    public IActionResult Put([FromBody] Recipe recipe)
+        {
+            if (recipe == null) return BadRequest();
+            return Ok(_recipeService.Update(recipe));
+        }
+        
+    [HttpDelete("{id}")]
+    public IActionResult Delete(long id)
+        {
+            _recipeService.Delete(id);
+            return NoContent();
+        }
 }

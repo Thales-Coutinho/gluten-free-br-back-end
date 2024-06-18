@@ -1,11 +1,20 @@
+using gluten_free_br.Model.Context;
 using gluten_free_br.Services;
 using gluten_free_br.Services.Implementation;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+// **MySQLConection**
+var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
+builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(
+    connection,
+    new MySqlServerVersion(new Version(8, 3, 0)))
+    );
 
 // **Dependency Injection**
 builder.Services.AddScoped<IRecipeService, RecipeServiceImplementation>();

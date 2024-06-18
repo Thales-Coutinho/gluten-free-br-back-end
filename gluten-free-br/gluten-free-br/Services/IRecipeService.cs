@@ -10,5 +10,8 @@ namespace gluten_free_br.Services
     {
         Recipe FinfById(long id);
         List<Recipe> FindAll();
+        Recipe Create(Recipe recipe);
+        Recipe Update(Recipe recipe);
+        void Delete(long id);
     }
 }
