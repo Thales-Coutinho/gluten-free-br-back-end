@@ -1,11 +1,13 @@
+using Asp.Versioning;
 using gluten_free_br.Model;
 using gluten_free_br.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gluten_free_br.Controllers;
 
+[ApiVersion("1")]
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/v{version:apiVersion}")]
 public class RecipeController : ControllerBase
 {
     private readonly ILogger<RecipeController> _logger;
