@@ -1,6 +1,8 @@
+using gluten_free_br.Business;
+using gluten_free_br.Business.Implementation;
 using gluten_free_br.Model.Context;
-using gluten_free_br.Services;
-using gluten_free_br.Services.Implementation;
+using gluten_free_br.Repository;
+using gluten_free_br.Repository.Implementation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +22,8 @@ builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(
 builder.Services.AddApiVersioning();
 
 // **Dependency Injection**
-builder.Services.AddScoped<IRecipeService, RecipeServiceImplementation>();
+builder.Services.AddScoped<IRecipeBusiness, RecipeBusinessImplementation>();
+builder.Services.AddScoped<IRecipeRepository, RecipeRepositoryImplementation>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

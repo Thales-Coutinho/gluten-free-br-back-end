@@ -1,6 +1,6 @@
 using Asp.Versioning;
 using gluten_free_br.Model;
-using gluten_free_br.Services;
+using gluten_free_br.Business;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gluten_free_br.Controllers;
@@ -11,25 +11,25 @@ namespace gluten_free_br.Controllers;
 public class RecipeController : ControllerBase
 {
     private readonly ILogger<RecipeController> _logger;
-    private IRecipeService _recipeService;
+    private IRecipeBusiness _recipeBusiness;
 
-    public RecipeController(ILogger<RecipeController> logger, IRecipeService recipeService)
+    public RecipeController(ILogger<RecipeController> logger, IRecipeBusiness recipeBusiness)
     {
         _logger = logger;
-        _recipeService = recipeService;
+        _recipeBusiness = recipeBusiness;
     }
 
     [HttpGet()]
     public IActionResult Get()
     {
-        return Ok(_recipeService.FindAll());
+        return Ok(_recipeBusiness.FindAll());
     }
 
 
     [HttpGet("{id}")]
     public IActionResult Get(long id)
     {
-        Recipe recipe = _recipeService.FinfById(id);
+        Recipe recipe = _recipeBusiness.FinfById(id);
         if(recipe == null) return NotFound();
         return Ok(recipe);
     }
@@ -38,20 +38,20 @@ public class RecipeController : ControllerBase
     public IActionResult Post([FromBody] Recipe recipe)
         {
             if (recipe == null) return BadRequest();
-            return Ok(_recipeService.Create(recipe));
+            return Ok(_recipeBusiness.Create(recipe));
         }
 
     [HttpPut]
     public IActionResult Put([FromBody] Recipe recipe)
         {
             if (recipe == null) return BadRequest();
-            return Ok(_recipeService.Update(recipe));
+            return Ok(_recipeBusiness.Update(recipe));
         }
         
     [HttpDelete("{id}")]
     public IActionResult Delete(long id)
         {
-            _recipeService.Delete(id);
+            _recipeBusiness.Delete(id);
             return NoContent();
         }
 }

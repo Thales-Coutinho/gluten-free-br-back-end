@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using gluten_free_br.Model;
 using gluten_free_br.Model.Context;
 
-namespace gluten_free_br.Services.Implementation
+namespace gluten_free_br.Repository.Implementation
 {
-    public class RecipeServiceImplementation : IRecipeService
+    public class RecipeRepositoryImplementation : IRecipeRepository
     {
         private MySQLContext _context;
-        public RecipeServiceImplementation(MySQLContext context)
+        public RecipeRepositoryImplementation(MySQLContext context)
         {
             _context = context;
         }
@@ -70,7 +70,7 @@ namespace gluten_free_br.Services.Implementation
                 }
             }
         }
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
             return _context.Recipes.Any(r => r.Id.Equals(id));
         }
